@@ -5,7 +5,10 @@
         <field name="type">list</field>
         <field name="arch" type="xml">
             <list>
-                <field name="name" string="Name"/>
+                <field name="tanggal_pengajuan" string="Tanggal Pengajuan" width="200" />
+                <field name="nomor_pr" string="Nomor PR"/>
+                <field name="diajukan_oleh" string="Diajukan oleh"/>
+                <field name="status" string="Status"/>
             </list>
         </field>
     </record>
@@ -18,10 +21,29 @@
             <form string="Purchase Request">
                 <sheet>
                     <group>
-                        <field name="name" string="Name" placeholder="Input Name" class="form-control"/>
+                        <field name="tanggal_pengajuan" string="Tanggal Pengajuan"/>
+                        <!-- <field name="created_by" string="created_by"/> -->
+                        <field name="nomor_pr" string="Nomor PR"/>
+                        <field name="diajukan_oleh" string="Diajukan oleh"/>
+                        <field name="status" string="Status"/>
                     </group>
                 </sheet>
             </form>
+        </field>
+    </record>
+
+    <record id="purchase_request_line_list_view_id" model="ir.ui.view">
+        <field name="name">purchase.request.line.list</field>
+        <field name="model">purchase.request.line</field>
+        <field name="type">list</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="nomor_pr" string="Nomor PR"/>
+                <field name="diajukan_oleh" string="Diajukan oleh"/>
+                <field name="product" string="Product"/>
+                <field name="quantity" string="Quantity"/>
+                <field name="status" string="Status"/>
+            </list>
         </field>
     </record>
 </odoo>

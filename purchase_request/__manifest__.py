@@ -12,12 +12,15 @@
     'category': 'Uncategorized',
     'version': '0.1',
 
-    'depends': ['base', 'web'],
+    'depends': ['base', 'web', 'hr'],
 
     'data': [
         'security/ir.model.access.csv',
+        # 'security/purchase_request_rules.xml',
+        'security/hr_employee_rule.xml',
         'views/content_view.xml',
         'views/item_menu.xml',
+        # 'views/res_users_view.xml',
     ],
 
     # 'demo': [

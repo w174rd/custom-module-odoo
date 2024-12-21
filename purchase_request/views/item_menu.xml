@@ -1,16 +1,16 @@
 
 <odoo>    
     <!-- Menu Action -->
-    <record id="purchase_request_list_action_id" model="ir.actions.act_window">
-        <field name="name">purchase.request.action.list</field>
+    <record id="purchase_request_action_id" model="ir.actions.act_window">
+        <field name="name">Purchase Request</field>
         <field name="res_model">purchase.request</field>
-        <field name="view_mode">list</field>
+        <field name="view_mode">list,form</field>
     </record>
 
-    <record id="purchase_request_form_action_id" model="ir.actions.act_window">
-        <field name="name">purchase.request.action.form</field>
-        <field name="res_model">purchase.request</field>
-        <field name="view_mode">form,list</field>
+    <record id="purchase_request_line_action_id" model="ir.actions.act_window">
+        <field name="name">Purchase Request Line</field>
+        <field name="res_model">purchase.request.line</field>
+        <field name="view_mode">list,form</field>
     </record>
     
     
@@ -24,13 +24,13 @@
         id="purchase_request_id"
         parent="parent_purchase_request_menu_id"
         name="Purchase Request"
-        action="purchase_request_form_action_id"
+        action="purchase_request_action_id"
         sequence="20"/>
 
     <menuitem
         id="purchase_request_line_id"
         parent="parent_purchase_request_menu_id"
         name="Purchase Request Line"
-        action="purchase_request_list_action_id"
+        action="purchase_request_line_action_id"
         sequence="30"/>
 </odoo>
