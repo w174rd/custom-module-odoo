@@ -20,6 +20,7 @@
         'security/hr_employee_rule.xml',
         'views/content_view.xml',
         'views/item_menu.xml',
+        'data/sequence.xml',
         # 'views/res_users_view.xml',
     ],
 
