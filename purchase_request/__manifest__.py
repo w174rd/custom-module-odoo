@@ -12,7 +12,7 @@
     'category': 'Uncategorized',
     'version': '0.1',
 
-    'depends': ['base', 'web', 'hr'],
+    'depends': ['base', 'web', 'hr', 'stock'],
 
     'data': [
         'security/ir.model.access.csv',
@@ -20,6 +20,7 @@
         'security/hr_employee_rule.xml',
         'views/content_view.xml',
         'views/item_menu.xml',
+        # 'views/res_product_view.xml',
         'data/sequence.xml',
         # 'views/res_users_view.xml',
     ],

@@ -32,15 +32,34 @@
                         <field name="tanggal_pengajuan" string="Tanggal Pengajuan"/>
                         <field name="nomor_pr" string="Nomor PR"/>
                         <field name="diajukan_oleh" string="Diajukan oleh"/>
-                        <!-- <notebook>
+                        <notebook>
                             <page string="Produk Request">
-                                <group>
-                                    <field name="produk_id" string="Produk"/>
-                                    <field name="qty_request" string="Qty Request"/>
-                                    <field name="qty_approved" string="Qty Approved"/>
-                                </group>
+                                <field name='product_ids'>
+                                    <list>
+                                        <field name="product" string="Produk"/>
+                                        <field name="qtyRequest" string="Qty Request" width="200"/>
+                                        <field name="qtyApproved" string="Qty Approved" width="200"/>
+                                    </list>
+                                </field>
                             </page>
-                        </notebook> -->
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="product_request_view" model="ir.ui.view">
+        <field name="name">product.request.form.view</field>
+        <field name="model">product.request</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Add Request">
+                <sheet>
+                    <group>
+                        <field name="product" string="Produk"/>
+                        <field name="qtyRequest" string="Qty Request"/>
+                        <field name="qtyApproved" string="Qty Approved"/>
                     </group>
                 </sheet>
             </form>

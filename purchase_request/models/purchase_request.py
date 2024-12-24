@@ -28,6 +28,8 @@ class PurchaseRequest(models.Model):
         ('Rejected', 'Rejected')
     ], string="Status", default="Draft")
 
+    product_ids = fields.One2many('product.request', 'parent_id')
+
     # @api.depends('diajukan_oleh')
     # def get_employee_safely(self):
     #     try:
