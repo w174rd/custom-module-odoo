@@ -1,0 +1,85 @@
+<odoo>
+    <record id="purchase_request_list_view_id" model="ir.ui.view">
+        <field name="name">purchase.request.list</field>
+        <field name="model">purchase.request</field>
+        <field name="type">list</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="tanggal_pengajuan" string="Tanggal Pengajuan" width="200" />
+                <field name="nomor_pr" string="Nomor PR"/>
+                <field name="diajukan_oleh" string="Diajukan oleh"/>
+                <field name="status" string="Status"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="test_pegawai_form_view_id" model="ir.ui.view">
+        <field name="name">purchase.request.form</field>
+        <field name="model">purchase.request</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Purchase Request">
+                <header>
+                    <button name="action_set_submit" string="Submit" type="object" class="btn-primary" 
+                        invisible="status != 'draft'" />
+                    <button name="action_set_approve" string="Approve" type="object" class="btn-primary" 
+                        invisible="status != 'to_approve'" />
+                    <button name="action_set_reject" string="Reject" type="object" class="btn-danger" 
+                        invisible="status != 'to_approve'" />
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="tanggal_pengajuan" string="Tanggal Pengajuan"/>
+                        <field name="nomor_pr" string="Nomor PR"/>
+                        <field name="diajukan_oleh" string="Diajukan oleh"/>
+                        <notebook>
+                            <page string="Produk Request">
+                                <field name='product_ids'>
+                                    <list>
+                                        <field name="product" string="Produk"/>
+                                        <field name="qty_request" string="Qty Request" width="200"/>
+                                        <field name="qty_approved" string="Qty Approved" width="200"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="product_request_view" model="ir.ui.view">
+        <field name="name">product.request.form.view</field>
+        <field name="model">product.request</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Add Request">
+                <sheet>
+                    <group>
+                        <field name="product" string="Produk"/>
+                        <field name="qty_request" string="Qty Request"/>
+                        <field name="qty_approved" string="Qty Approved"
+                            readonly="user_state in ['user']"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="purchase_request_line_list_view_id" model="ir.ui.view">
+        <field name="name">purchase.request.line.list</field>
+        <field name="model">purchase.request.line</field>
+        <field name="type">list</field>
+        <field name="arch" type="xml">
+            <list create="false">
+                <field name="nomor_pr" string="Nomor PR"/>
+                <field name="diajukan_oleh" string="Diajukan oleh"/>
+                <field name="product" string="Product"/>
+                <field name="quantity" string="Quantity"/>
+                <field name="status" string="Status"/>
+            </list>
+        </field>
+    </record>
+</odoo>
