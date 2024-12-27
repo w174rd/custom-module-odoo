@@ -30,6 +30,17 @@ class PurchaseRequest(models.Model):
 
     product_ids = fields.One2many('product.request', 'parent_id')
 
+    purchase_request_line_id = fields.One2many(
+        comodel_name='purchase.request.line',
+        inverse_name='purchase_request_id',
+        string='Request Lines'
+    )
+    
+    status_line = fields.Selection(
+        related='purchase_request_line_id.status', 
+        string="Status"
+    )
+
     # @api.depends('diajukan_oleh')
     # def get_employee_safely(self):
     #     try:
@@ -56,6 +67,10 @@ class PurchaseRequest(models.Model):
         return f"PR/{current_year}/{current_month}/{sequence}"
     
     def action_set_approve(self):
+        for record in self:
+            self.env['purchase.request.line'].create({
+                'purchase_request_id': record.id,
+            })
         self.status = 'approved'
 
     def action_set_reject(self):

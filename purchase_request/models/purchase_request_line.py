@@ -5,11 +5,13 @@ class PurchaseRequestLine(models.Model):
     _name= 'purchase.request.line'
     _description = 'Purchase Request Line'
 
-    nomor_pr = fields.Char(string="Nomor PR")
-    diajukan_oleh = fields.Char(string="Diajukan Oleh")
-    product = fields.Char(string="Product")
-    quantity = fields.Char(string="Quantity")
     status = fields.Selection([
-        ('PR Validated', 'PR Validated'),
-        ('RFQ Created', 'Diajukan oleh'),
-    ], string='Status', default='PR Validated')
+        ('pr_validated', 'PR Validated'),
+        ('rfq_created', 'RFQ Created'),
+    ], string='Status', default='pr_validated')
+
+    purchase_request_id = fields.Many2one(
+        comodel_name='purchase.request',
+        string='Purchase Request',
+        ondelete='cascade'
+    )

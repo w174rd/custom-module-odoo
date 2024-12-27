@@ -12,6 +12,15 @@ class ProductInherit(models.Model):
     qty_approved = fields.Integer(string="Qty Approved")
     user_state = fields.Char(readonly=True)
 
+    # nomor_pr = fields.Char(
+    #     related='parent_id.nomor_pr', 
+    #     string="Nomor PR"
+    # )
+    # diajukan_oleh = fields.Many2one(
+    #     related='parent_id.diajukan_oleh', 
+    #     string="Diajukan oleh"
+    # )
+
     @api.onchange('qty_approved')
     def _onchange_qty_approved(self):
         user_type = self.env.user.purchase_request_rule

@@ -22,10 +22,13 @@
                 <header>
                     <button name="action_set_submit" string="Submit" type="object" class="btn-primary" 
                         invisible="status != 'draft'" />
-                    <button name="action_set_approve" string="Approve" type="object" class="btn-primary" 
+                        
+                    <button name="action_set_approve" string="Approve" type="object" class="btn-primary"
                         invisible="status != 'to_approve'" />
+
                     <button name="action_set_reject" string="Reject" type="object" class="btn-danger" 
                         invisible="status != 'to_approve'" />
+
                     <field name="status" widget="statusbar"/>
                 </header>
                 <sheet>
@@ -70,15 +73,15 @@
 
     <record id="purchase_request_line_list_view_id" model="ir.ui.view">
         <field name="name">purchase.request.line.list</field>
-        <field name="model">purchase.request.line</field>
+        <field name="model">purchase.request</field>
         <field name="type">list</field>
         <field name="arch" type="xml">
-            <list create="false">
+            <list>
                 <field name="nomor_pr" string="Nomor PR"/>
                 <field name="diajukan_oleh" string="Diajukan oleh"/>
-                <field name="product" string="Product"/>
-                <field name="quantity" string="Quantity"/>
-                <field name="status" string="Status"/>
+                <field name="product_ids" string="Product"/>
+                <!-- <field name="qty_approved" string="Quantity Approved"/> -->
+                <field name="status_line" string="Status"/>
             </list>
         </field>
     </record>
