@@ -20,9 +20,8 @@
         'security/hr_employee_rule.xml',
         'views/content_view.xml',
         'views/item_menu.xml',
-        # 'views/res_product_view.xml',
         'data/sequence.xml',
-        # 'views/res_users_view.xml',
+        'views/res_users_view.xml',
     ],
 
     # 'demo': [
