@@ -21,7 +21,11 @@
             <form string="Purchase Request">
                 <header>
                     <button name="action_set_submit" string="Submit" type="object" class="btn-primary" 
-                        invisible="status != 'Draft'" />
+                        invisible="status != 'draft'" />
+                    <button name="action_set_approve" string="Approve" type="object" class="btn-primary" 
+                        invisible="status != 'to_approve'" />
+                    <button name="action_set_reject" string="Reject" type="object" class="btn-danger" 
+                        invisible="status != 'to_approve'" />
                     <field name="status" widget="statusbar"/>
                 </header>
                 <sheet>
@@ -69,7 +73,7 @@
         <field name="model">purchase.request.line</field>
         <field name="type">list</field>
         <field name="arch" type="xml">
-            <list>
+            <list create="false">
                 <field name="nomor_pr" string="Nomor PR"/>
                 <field name="diajukan_oleh" string="Diajukan oleh"/>
                 <field name="product" string="Product"/>

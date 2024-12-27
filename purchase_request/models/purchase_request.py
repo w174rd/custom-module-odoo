@@ -22,11 +22,11 @@ class PurchaseRequest(models.Model):
         readonly=True
     )
     status = fields.Selection([
-        ('Draft', 'Draft'),
-        ('To approve', 'To approve'),
-        ('Approved', 'Approved'),
-        ('Rejected', 'Rejected')
-    ], string="Status", default="Draft")
+        ('draft', 'Draft'),
+        ('to_approve', 'To approve'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected')
+    ], string="Status", default="draft")
 
     product_ids = fields.One2many('product.request', 'parent_id')
 
@@ -41,7 +41,7 @@ class PurchaseRequest(models.Model):
     #         raise UserError(f"Error: {str(e)}")
 
     def action_set_submit(self):
-        self.status = 'To approve'
+        self.status = 'to_approve'
         for record in self:
             record.nomor_pr = self._generate_pr_number()
             # record.tanggal_pengajuan = self._get_formatted_today_date()
@@ -54,6 +54,13 @@ class PurchaseRequest(models.Model):
         sequence = self.env['ir.sequence'].next_by_code('purchase.request')
         
         return f"PR/{current_year}/{current_month}/{sequence}"
+    
+    def action_set_approve(self):
+        self.status = 'approved'
+
+    def action_set_reject(self):
+        self.status = 'rejected'
+           
     
     # def _get_formatted_today_date(self):
     #     today = fields.Date.context_today(self)
