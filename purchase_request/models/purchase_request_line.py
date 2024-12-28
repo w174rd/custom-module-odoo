@@ -10,6 +10,7 @@ class PurchaseRequestLine(models.Model):
         ('rfq_created', 'RFQ Created'),
     ], string='Status', default='pr_validated')
 
+    # Relation Purchase Request
     purchase_request_id = fields.Many2one(
         comodel_name='purchase.request',
         string='Purchase Request',

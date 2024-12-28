@@ -73,15 +73,18 @@
 
     <record id="purchase_request_line_list_view_id" model="ir.ui.view">
         <field name="name">purchase.request.line.list</field>
-        <field name="model">purchase.request</field>
+        <field name="model">product.request</field>
         <field name="type">list</field>
         <field name="arch" type="xml">
             <list>
-                <field name="nomor_pr" string="Nomor PR"/>
-                <field name="diajukan_oleh" string="Diajukan oleh"/>
-                <field name="product_ids" string="Product"/>
-                <!-- <field name="qty_approved" string="Quantity Approved"/> -->
-                <field name="status_line" string="Status"/>
+                <header>
+                    <button name="action_create_rfq" type="object" string="Buat RFQ" class="oe_highlight"/>
+                </header>
+                <field name="relation_pr_nomor_pr" string="Nomor PR"/>
+                <field name="relation_pr_diajukan_oleh" string="Diajukan oleh"/>
+                <field name="product" string="Product"/>
+                <field name="qty_approved" string="Quantity"/>
+                <field name="relation_pr_line_status" string="Status"/>
             </list>
         </field>
     </record>

@@ -28,15 +28,17 @@ class PurchaseRequest(models.Model):
         ('rejected', 'Rejected')
     ], string="Status", default="draft")
 
+    # Relation product
     product_ids = fields.One2many('product.request', 'parent_id')
 
+    # Relation Purchase Request Line
     purchase_request_line_id = fields.One2many(
         comodel_name='purchase.request.line',
         inverse_name='purchase_request_id',
         string='Request Lines'
     )
     
-    status_line = fields.Selection(
+    relation_pr_line_status = fields.Selection(
         related='purchase_request_line_id.status', 
         string="Status"
     )
@@ -75,7 +77,6 @@ class PurchaseRequest(models.Model):
 
     def action_set_reject(self):
         self.status = 'rejected'
-           
     
     # def _get_formatted_today_date(self):
     #     today = fields.Date.context_today(self)
