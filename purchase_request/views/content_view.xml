@@ -76,7 +76,7 @@
         <field name="model">product.request</field>
         <field name="type">list</field>
         <field name="arch" type="xml">
-            <list>
+            <list create="False">
                 <header>
                     <button name="action_create_rfq" type="object" string="Buat RFQ" class="oe_highlight"/>
                 </header>
