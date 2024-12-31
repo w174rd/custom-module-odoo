@@ -39,7 +39,10 @@
                         <notebook>
                             <page string="Produk Request">
                                 <field name='product_ids'>
-                                    <list>
+                                    <list editable='bottom'>
+                                        <control>
+                                            <create name="add_product_control" string="Add a product"/>
+                                        </control>
                                         <field name="product" string="Produk"/>
                                         <field name="qty_request" string="Qty Request" width="200"/>
                                         <field name="qty_approved" string="Qty Approved" width="200"/>
@@ -47,24 +50,6 @@
                                 </field>
                             </page>
                         </notebook>
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
-
-    <record id="product_request_view" model="ir.ui.view">
-        <field name="name">product.request.form.view</field>
-        <field name="model">product.request</field>
-        <field name="type">form</field>
-        <field name="arch" type="xml">
-            <form string="Add Request">
-                <sheet>
-                    <group>
-                        <field name="product" string="Produk"/>
-                        <field name="qty_request" string="Qty Request"/>
-                        <field name="qty_approved" string="Qty Approved"
-                            readonly="user_state in ['user']"/>
                     </group>
                 </sheet>
             </form>
