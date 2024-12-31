@@ -1,0 +1,29 @@
+<odoo>
+    <record id="wizard_create_rfq_form" model="ir.ui.view">
+        <field name="name">wizard.create.rfq.form</field>
+        <field name="model">wizard.rfq</field>
+        <field name="arch" type="xml">
+            <form string="Wizard">
+                <sheet>
+                    <group>
+                        <field name="vendor" string="Vendor" />
+                        <notebook>
+                            <page string="Produk Request">
+                                <field name='product_req_ids' readonly="1" options="{'no_create': True}">
+                                    <list>
+                                        <field name="product" string="Produk"/>
+                                        <field name="qty_approved" string="Qty Approved" width="200"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </group>
+                    <footer>
+                        <button string="Create RFQ" type="object" name="action_create_rfq" class="btn-primary" />
+                        <button string="Cancel" class="btn-secondary" special="cancel" />
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

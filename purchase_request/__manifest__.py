@@ -12,7 +12,7 @@
     'category': 'Uncategorized',
     'version': '0.1',
 
-    'depends': ['base', 'web', 'hr', 'stock'],
+    'depends': ['base', 'web', 'hr', 'stock', 'purchase'],
 
     'data': [
         'security/ir.model.access.csv',
@@ -22,6 +22,7 @@
         'views/item_menu.xml',
         'data/sequence.xml',
         'views/res_users_view.xml',
+        'views/wizard_create_rfq.xml',
     ],
 
     # 'demo': [

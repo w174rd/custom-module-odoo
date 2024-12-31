@@ -5,7 +5,7 @@ from odoo import models, fields, api
 class ProductInherit(models.Model):
     _name = 'product.request'
     _description = 'Product Request'
-
+    
     product = fields.Many2one('product.product', string="Product")
     qty_request = fields.Integer(string="Qty Request")
     qty_approved = fields.Integer(string="Qty Approved")
@@ -13,6 +13,7 @@ class ProductInherit(models.Model):
 
     # Relation Purchase Request
     parent_id = fields.Many2one('purchase.request', readonly=True)
+    wizard_id = fields.Many2one('wizard.rfq', readonly=True)
 
     relation_pr_nomor_pr = fields.Char(
         related='parent_id.nomor_pr', 
@@ -34,22 +35,14 @@ class ProductInherit(models.Model):
         string="Status"
     )
 
-    # nomor_pr = fields.Char(
-    #     related='parent_id.nomor_pr', 
-    #     string="Nomor PR"
-    # )
-    # diajukan_oleh = fields.Many2one(
-    #     related='parent_id.diajukan_oleh', 
-    #     string="Diajukan oleh"
-    # )
-
     def action_create_rfq(self):
-        # self.relation_pr_line_status = 'rfq_created'
-        for record in self:
-            if record.parent_id:
-                for relation_pr_line in record.parent_id.purchase_request_line_id:
-                    relation_pr_line.status = 'rfq_created'
-
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Create RFQ',
+            'res_model': 'wizard.rfq',
+            'view_mode': 'form',
+            'target': 'new',
+        }
 
     @api.onchange('qty_approved')
     def _onchange_qty_approved(self):

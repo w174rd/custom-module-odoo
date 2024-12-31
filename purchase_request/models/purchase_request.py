@@ -43,16 +43,6 @@ class PurchaseRequest(models.Model):
         string="Status"
     )
 
-    # @api.depends('diajukan_oleh')
-    # def get_employee_safely(self):
-    #     try:
-    #         employee = self.env['hr.employee'].search([('user_id', '=', self.env.user.id)], limit=1)
-    #         if not employee:
-    #             raise UserError("Tidak ada karyawan yang ditemukan untuk user ini.")
-    #         return employee.name
-    #     except Exception as e:
-    #         raise UserError(f"Error: {str(e)}")
-
     def action_set_submit(self):
         self.status = 'to_approve'
         for record in self:
@@ -77,11 +67,6 @@ class PurchaseRequest(models.Model):
 
     def action_set_reject(self):
         self.status = 'rejected'
-    
-    # def _get_formatted_today_date(self):
-    #     today = fields.Date.context_today(self)
-    #     formatted_date = today.strftime('%d/%m/%Y')
-    #     return formatted_date
 
 
 
