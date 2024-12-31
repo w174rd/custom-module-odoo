@@ -38,7 +38,7 @@
                         <field name="diajukan_oleh" string="Diajukan oleh"/>
                         <notebook>
                             <page string="Produk Request">
-                                <field name='product_ids'>
+                                <field name='product_ids' readonly="status not in ['draft']">
                                     <list editable='bottom'>
                                         <control>
                                             <create name="add_product_control" string="Add a product"/>
