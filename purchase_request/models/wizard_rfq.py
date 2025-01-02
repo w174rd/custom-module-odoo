@@ -6,7 +6,7 @@ class WizardRFQ(models.Model):
     _description = 'Wizard RFQ'
 
     vendor = fields.Many2one('res.partner', string="Vendor")
-    product_req_ids = fields.One2many('product.request', 'wizard_id')
+    product_req_ids = fields.One2many('product.request', 'wizard_id', store=False)
 
     @api.model
     def default_get(self, fields_list):
@@ -17,7 +17,9 @@ class WizardRFQ(models.Model):
             for product in self.env['product.request'].browse(active_ids):
                 products.append((0, 0, {
                     'product': product.product.id,
+                    'qty_request': product.qty_request,
                     'qty_approved': product.qty_approved,
+                    'parent_id': product.parent_id.id
                 }))
             res.update({'product_req_ids': products})
         return res
@@ -39,7 +41,11 @@ class WizardRFQ(models.Model):
                 'product_qty': product.qty_approved,
                 # 'price_unit': product.product.standard_price,
                 # 'date_planned': fields.Date.today(),
-            })      
+            })
+
+            # update status
+            if product.parent_id:
+                product.parent_id.write({'status': 'rfq_created'})
 
         return {
             'type': 'ir.actions.act_window',
