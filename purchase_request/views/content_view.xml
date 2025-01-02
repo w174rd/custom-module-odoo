@@ -29,7 +29,7 @@
                     <button name="action_set_reject" string="Reject" type="object" class="btn-danger" 
                         invisible="status != 'to_approve'" />
 
-                    <field name="status" widget="statusbar"/>
+                    <field name="status" widget="statusbar" statusbar_visible="draft,to_approve,approved,rejected"/>
                 </header>
                 <sheet>
                     <group>
@@ -69,7 +69,7 @@
                 <field name="relation_pr_diajukan_oleh" string="Diajukan oleh"/>
                 <field name="product" string="Product"/>
                 <field name="qty_approved" string="Quantity"/>
-                <field name="relation_pr_line_status" string="Status"/>
+                <field name="custom_status_display" string="Status"/>
             </list>
         </field>
     </record>

@@ -10,7 +10,7 @@ class PurchaseRequest(models.Model):
         string="Tanggal Pengajuan",
         readonly=True
     )
-    # created_by = fields.Many2one('res.users', default= lambda self : self.env.user.id)
+
     nomor_pr = fields.Char(
         string="Nomor PR", 
         readonly=True
@@ -25,23 +25,13 @@ class PurchaseRequest(models.Model):
         ('draft', 'Draft'),
         ('to_approve', 'To approve'),
         ('approved', 'Approved'),
-        ('rejected', 'Rejected')
+        ('rejected', 'Rejected'),
+        ('pr_validated', 'PR Validated'),
+        ('rfq_created', 'RFQ Created'),
     ], string="Status", default="draft")
 
     # Relation product
     product_ids = fields.One2many('product.request', 'parent_id')
-
-    # Relation Purchase Request Line
-    purchase_request_line_id = fields.One2many(
-        comodel_name='purchase.request.line',
-        inverse_name='purchase_request_id',
-        string='Request Lines'
-    )
-    
-    relation_pr_line_status = fields.Selection(
-        related='purchase_request_line_id.status', 
-        string="Status"
-    )
 
     def action_set_submit(self):
         self.status = 'to_approve'
@@ -59,10 +49,6 @@ class PurchaseRequest(models.Model):
         return f"PR/{current_year}/{current_month}/{sequence}"
     
     def action_set_approve(self):
-        for record in self:
-            self.env['purchase.request.line'].create({
-                'purchase_request_id': record.id,
-            })
         self.status = 'approved'
 
     def action_set_reject(self):

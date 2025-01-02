@@ -30,10 +30,20 @@ class ProductInherit(models.Model):
         string="Status"
     )
 
-    relation_pr_line_status = fields.Selection(
-        related='parent_id.relation_pr_line_status', 
-        string="Status"
+    custom_status_display = fields.Char(
+        compute="_compute_status_display",
+        store=False
     )
+
+    def _compute_status_display(self):
+        for record in self:
+            if record.relation_pr_status == 'approved':
+                record.custom_status_display = 'PR Validated'
+            elif record.relation_pr_status == 'rfq_created':
+                record.custom_status_display = 'RFQ Created'
+            else:
+                record.custom_status_display = False
+
 
     def action_create_rfq(self):
         return {
