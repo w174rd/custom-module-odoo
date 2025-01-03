@@ -29,6 +29,8 @@
                     <button name="action_set_reject" string="Reject" type="object" class="btn-danger" 
                         invisible="status != 'to_approve'" />
 
+                    <button name="action_print_out" string="Print" type="object" />    
+
                     <field name="status" widget="statusbar" statusbar_visible="draft,to_approve,approved,rejected"/>
                 </header>
                 <sheet>

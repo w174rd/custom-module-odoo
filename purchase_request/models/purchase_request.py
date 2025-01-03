@@ -54,6 +54,9 @@ class PurchaseRequest(models.Model):
     def action_set_reject(self):
         self.status = 'rejected'
 
+    def action_print_out(self):
+        return self.env.ref("purchase_request.action_print_out_purchase_request").report_action(self)
+
 
 
 

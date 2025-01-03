@@ -18,6 +18,8 @@
         'security/ir.model.access.csv',
         # 'security/purchase_request_rules.xml',
         'security/hr_employee_rule.xml',
+        'report/print_out_purchase_request.xml',
+        'report/print_out_purchase_request_template.xml',
         'views/content_view.xml',
         'views/item_menu.xml',
         'data/sequence.xml',
