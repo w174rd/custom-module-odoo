@@ -15,9 +15,9 @@
     'depends': ['base', 'web', 'hr', 'stock', 'purchase'],
 
     'data': [
-        'security/ir.model.access.csv',
-        # 'security/purchase_request_rules.xml',
+        'security/purchase_request_rules.xml',
         'security/hr_employee_rule.xml',
+        'security/ir.model.access.csv',
         'report/print_out_purchase_request.xml',
         'report/print_out_purchase_request_template.xml',
         'views/content_view.xml',

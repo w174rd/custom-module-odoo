@@ -53,12 +53,3 @@ class ProductInherit(models.Model):
             'view_mode': 'form',
             'target': 'new',
         }
-
-    @api.onchange('qty_approved')
-    def _onchange_qty_approved(self):
-        user_type = self.env.user.purchase_request_rule
-        for record in self:
-            if user_type == 'approver':
-                record.user_state = 'approver'
-            else:
-                record.user_state = 'user'

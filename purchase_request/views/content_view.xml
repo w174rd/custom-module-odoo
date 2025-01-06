@@ -24,10 +24,10 @@
                         invisible="status != 'draft'" />
                         
                     <button name="action_set_approve" string="Approve" type="object" class="btn-primary"
-                        invisible="status != 'to_approve'" />
+                        invisible="status != 'to_approve'" groups="purchase_request.group_purchase_request_approver" />
 
                     <button name="action_set_reject" string="Reject" type="object" class="btn-danger" 
-                        invisible="status != 'to_approve'" />
+                        invisible="status != 'to_approve'" groups="purchase_request.group_purchase_request_approver" />
 
                     <button name="action_print_out" string="Print" type="object" />    
 
@@ -43,11 +43,11 @@
                                 <field name='product_ids' readonly="status not in ['draft']">
                                     <list editable='bottom'>
                                         <control>
-                                            <create name="add_product_control" string="Add a product"/>
+                                            <create name="add_line_control" string="Add a product"/>
                                         </control>
                                         <field name="product" string="Produk"/>
                                         <field name="qty_request" string="Qty Request" width="200"/>
-                                        <field name="qty_approved" string="Qty Approved" width="200"/>
+                                        <field name="qty_approved" string="Qty Approved" width="200" readonly="false"/>
                                     </list>
                                 </field>
                             </page>
