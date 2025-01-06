@@ -8,12 +8,13 @@
 
                 <div class="page">
                     <h2 class="text-center">Purchase Request Form</h2>
-                    <p><span t-field="doc.nomor_pr"/></p>
-                    <p><strong>Tanggal Pengajuan: </strong> <span t-field="doc.tanggal_pengajuan"/></p>
-                    <p><strong>Diajukan Oleh: </strong> <span t-field="doc.diajukan_oleh.name"/></p>
+                    <p><h3><span t-field="doc.nomor_pr"/></h3></p>
+                    <p>Tanggal Pengajuan: <span t-field="doc.tanggal_pengajuan" style="margin-left: 10px"/></p>
+                    <p>Diajukan Oleh: <span t-field="doc.diajukan_oleh.name" style="margin-left: 10px"/></p>
+                    <p>Status: <span t-field="doc.status" style="margin-left: 10px"/></p>
 
                     <t t-if="doc.product_ids">
-                        <h5>Product</h5>
+                        <p><h5>Product</h5></p>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
