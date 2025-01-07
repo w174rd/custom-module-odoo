@@ -6,16 +6,16 @@ class PurchaseRequest(models.Model):
     _name = 'purchase.request'
     _description = 'purchase.request'
 
-    tanggal_pengajuan = fields.Date(
+    date = fields.Date(
         string="Tanggal Pengajuan",
         readonly=True
     )
 
-    nomor_pr = fields.Char(
+    pr_number = fields.Char(
         string="Nomor PR", 
         readonly=True
     )
-    diajukan_oleh = fields.Many2one(
+    submited_by = fields.Many2one(
         'hr.employee',
         string="Diajukan Oleh",
         default=lambda self: self.env['hr.employee'].search([('user_id', '=', self.env.user.id)], limit=1),
@@ -36,9 +36,9 @@ class PurchaseRequest(models.Model):
     def action_set_submit(self):
         self.status = 'to_approve'
         for record in self:
-            record.nomor_pr = self._generate_pr_number()
-            # record.tanggal_pengajuan = self._get_formatted_today_date()
-            record.tanggal_pengajuan = fields.Date.context_today(self)
+            record.pr_number = self._generate_pr_number()
+            # record.date = self._get_formatted_today_date()
+            record.date = fields.Date.context_today(self)
 
     def _generate_pr_number(self):
         current_year = datetime.now().strftime('%y')

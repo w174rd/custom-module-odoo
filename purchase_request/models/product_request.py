@@ -15,13 +15,13 @@ class ProductInherit(models.Model):
     parent_id = fields.Many2one('purchase.request', readonly=True)
     wizard_id = fields.Many2one('wizard.rfq', readonly=True)
 
-    relation_pr_nomor_pr = fields.Char(
-        related='parent_id.nomor_pr', 
+    relation_pr_number_pr = fields.Char(
+        related='parent_id.pr_number', 
         string="Nomor PR"
     )
 
-    relation_pr_diajukan_oleh = fields.Many2one(
-        related='parent_id.diajukan_oleh', 
+    relation_pr_submited_by = fields.Many2one(
+        related='parent_id.submited_by', 
         string="Diajukan oleh"
     )
 

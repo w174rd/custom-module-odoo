@@ -5,9 +5,9 @@
         <field name="type">list</field>
         <field name="arch" type="xml">
             <list>
-                <field name="tanggal_pengajuan" string="Tanggal Pengajuan" width="200" />
-                <field name="nomor_pr" string="Nomor PR"/>
-                <field name="diajukan_oleh" string="Diajukan oleh"/>
+                <field name="date" string="Tanggal Pengajuan" width="200" />
+                <field name="pr_number" string="Nomor PR"/>
+                <field name="submited_by" string="Diajukan oleh"/>
                 <field name="status" string="Status"/>
             </list>
         </field>
@@ -35,9 +35,9 @@
                 </header>
                 <sheet>
                     <group>
-                        <field name="tanggal_pengajuan" string="Tanggal Pengajuan"/>
-                        <field name="nomor_pr" string="Nomor PR"/>
-                        <field name="diajukan_oleh" string="Diajukan oleh"/>
+                        <field name="date" string="Tanggal Pengajuan"/>
+                        <field name="pr_number" string="Nomor PR"/>
+                        <field name="submited_by" string="Diajukan oleh"/>
                         <notebook>
                             <page string="Produk Request">
                                 <field name='product_ids' readonly="status not in ['draft']">
@@ -67,8 +67,8 @@
                 <header>
                     <button name="action_create_rfq" type="object" string="Buat RFQ" class="oe_highlight"/>
                 </header>
-                <field name="relation_pr_nomor_pr" string="Nomor PR"/>
-                <field name="relation_pr_diajukan_oleh" string="Diajukan oleh"/>
+                <field name="relation_pr_number_pr" string="Nomor PR"/>
+                <field name="relation_pr_submited_by" string="Diajukan oleh"/>
                 <field name="product" string="Product"/>
                 <field name="qty_approved" string="Quantity"/>
                 <field name="custom_status_display" string="Status"/>

@@ -5,7 +5,7 @@
         <record id="hr_employee_user_or_manager_rule" model="ir.rule">
             <field name="name">Employee: User or Manager</field>
             <field name="model_id" ref="model_purchase_request"/>
-            <field name="domain_force">['|', ('diajukan_oleh.user_id', '=', user.id), ('diajukan_oleh.parent_id.user_id', '=', user.id)]</field>
+            <field name="domain_force">['|', ('submited_by.user_id', '=', user.id), ('submited_by.parent_id.user_id', '=', user.id)]</field>
             <field name="groups" eval="[(4, ref('base.group_user'))]"/>
         </record>
 
