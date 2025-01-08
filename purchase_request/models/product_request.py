@@ -10,6 +10,11 @@ class ProductInherit(models.Model):
     qty_request = fields.Integer(string="Qty Request")
     qty_approved = fields.Integer(string="Qty Approved")
     user_state = fields.Char(readonly=True)
+    groups_id = fields.Selection([
+        ('user', 'User'),
+        ('approver', 'Approver'),
+    ], default="user", compute="_compute_groups_id")
+
 
     # Relation Purchase Request
     parent_id = fields.Many2one('purchase.request', readonly=True)
@@ -43,6 +48,13 @@ class ProductInherit(models.Model):
                 record.custom_status_display = 'RFQ Created'
             else:
                 record.custom_status_display = False
+
+    def _compute_groups_id(self):
+        user = self.env.user
+        if user.has_group('purchase_request.group_purchase_request_user') and not user.has_group('purchase_request.group_purchase_request_approver'):
+            self.groups_id = 'user'
+        else:
+            self.groups_id = 'approver'
 
 
     def action_create_rfq(self):

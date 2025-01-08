@@ -40,14 +40,14 @@
                         <field name="submited_by" string="Diajukan oleh"/>
                         <notebook>
                             <page string="Produk Request">
-                                <field name='product_ids' readonly="status not in ['draft']">
+                                <field name='product_ids' readonly="is_readonly">
                                     <list editable='bottom'>
                                         <control>
                                             <create name="add_line_control" string="Add a product"/>
                                         </control>
                                         <field name="product" string="Produk"/>
                                         <field name="qty_request" string="Qty Request" width="200"/>
-                                        <field name="qty_approved" string="Qty Approved" width="200" readonly="false"/>
+                                        <field name="qty_approved" string="Qty Approved" width="200" readonly="groups_id in ['user']"/>
                                     </list>
                                 </field>
                             </page>

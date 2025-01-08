@@ -30,6 +30,8 @@ class PurchaseRequest(models.Model):
         ('rfq_created', 'RFQ Created'),
     ], string="Status", default="draft")
 
+    is_readonly = fields.Boolean(default=False, compute="_compute_is_readonly")
+
     # Relation product
     product_ids = fields.One2many('product.request', 'parent_id')
 
@@ -56,6 +58,13 @@ class PurchaseRequest(models.Model):
 
     def action_print_out(self):
         return self.env.ref("purchase_request.action_print_out_purchase_request").report_action(self)
+    
+    def _compute_is_readonly(self):
+        user = self.env.user
+        if user.has_group('purchase_request.group_purchase_request_user') and not user.has_group('purchase_request.group_purchase_request_approver') and self.status != 'draft':
+            self.is_readonly = True
+        else:
+            self.is_readonly = False
 
 
 
