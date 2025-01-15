@@ -1,4 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_purchase_request,purchase.request,model_purchase_request,,1,1,1,1
-access_product_request,purchase.product.request,model_product_request,,1,1,1,1
-access_wizard_rfq,purchase.wizard.rfq,model_wizard_rfq,,1,1,1,1
+access_purchase_request,purchase.request,model_purchase_request,group_purchase_request_user,1,1,1,1
+access_product_request,purchase.product.request,model_product_request,group_purchase_request_user,1,1,1,1
+access_wizard_rfq,purchase.wizard.rfq,model_wizard_rfq,group_purchase_request_user,1,1,1,1
