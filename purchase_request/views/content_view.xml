@@ -6,7 +6,7 @@
         <field name="arch" type="xml">
             <list>
                 <field name="date" string="Tanggal Pengajuan" width="200" />
-                <field name="pr_number" string="Nomor PR"/>
+                <field name="name" string="Nomor PR"/>
                 <field name="submited_by" string="Diajukan oleh"/>
                 <field name="status" string="Status"/>
             </list>
@@ -36,7 +36,7 @@
                 <sheet>
                     <group>
                         <field name="date" string="Tanggal Pengajuan"/>
-                        <field name="pr_number" string="Nomor PR"/>
+                        <field name="name" string="Nomor PR"/>
                         <field name="submited_by" string="Diajukan oleh"/>
                         <notebook>
                             <page string="Produk Request">

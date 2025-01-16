@@ -11,7 +11,7 @@ class PurchaseRequest(models.Model):
         readonly=True
     )
 
-    pr_number = fields.Char(
+    name = fields.Char(
         string="Nomor PR", 
         readonly=True
     )
@@ -38,7 +38,7 @@ class PurchaseRequest(models.Model):
     def action_set_submit(self):
         self.status = 'to_approve'
         for record in self:
-            record.pr_number = self._generate_pr_number()
+            record.name = self._generate_pr_number()
             # record.date = self._get_formatted_today_date()
             record.date = fields.Date.context_today(self)
 

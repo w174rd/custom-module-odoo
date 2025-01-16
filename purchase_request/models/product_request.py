@@ -21,7 +21,7 @@ class ProductInherit(models.Model):
     wizard_id = fields.Many2one('wizard.rfq', readonly=True)
 
     relation_pr_number_pr = fields.Char(
-        related='parent_id.pr_number', 
+        related='parent_id.name', 
         string="Nomor PR"
     )
 

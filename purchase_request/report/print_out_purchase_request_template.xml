@@ -4,11 +4,11 @@
     <t t-call="web.html_container">
         <t t-foreach="docs" t-as="o">
             <t t-call="web.external_layout">
-                <t t-set="doc" t-value="o.with_context(lang=o.pr_number)"/>
+                <t t-set="doc" t-value="o.with_context(lang=o.name)"/>
 
                 <div class="page">
                     <h2 class="text-center">Purchase Request Form</h2>
-                    <p><h3><span t-field="doc.pr_number"/></h3></p>
+                    <p><h3><span t-field="doc.name"/></h3></p>
                     <p>Tanggal Pengajuan: <span t-field="doc.date" style="margin-left: 10px"/></p>
                     <p>Diajukan Oleh: <span t-field="doc.submited_by.name" style="margin-left: 10px"/></p>
                     <p>Status: <span t-field="doc.status" style="margin-left: 10px"/></p>
