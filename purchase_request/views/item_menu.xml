@@ -30,6 +30,7 @@
     <menuitem
         id="parent_purchase_request_menu_id"
         name="Purchase Request"
+        web_icon="purchase_request,static/description/icon.png"
         sequence="10"/>
 
     <menuitem
