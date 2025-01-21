@@ -9,6 +9,14 @@
         <field name="view_id" ref="purchase_request_list_view_id"/>
     </record>
 
+    <record id="purchase_request_action_form_id" model="ir.actions.act_window">
+        <field name="name">Purchase Request</field>
+        <field name="res_model">purchase.request</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('status', 'in', ['draft', 'to_approve', 'approved', 'rejected'])]</field>
+        <field name="view_id" ref="test_pegawai_form_view_id"/>
+    </record>
+
     <record id="purchase_request_line_action_id" model="ir.actions.act_window">
         <field name="name">Purchase Request Line</field>
         <field name="res_model">product.request</field>
@@ -28,8 +36,21 @@
         id="purchase_request_id"
         parent="parent_purchase_request_menu_id"
         name="Purchase Request"
-        action="purchase_request_action_id"
         sequence="20"/>
+
+    <menuitem
+        id="purchase_request_submenu_list_id"
+        parent="purchase_request_id"
+        name="List Data"
+        action="purchase_request_action_id"
+        sequence="21"/>
+
+    <menuitem
+        id="purchase_request_submenu_new_id"
+        parent="purchase_request_id"
+        name="New Data"
+        action="purchase_request_action_form_id"
+        sequence="22"/>        
 
     <menuitem
         id="purchase_request_line_id"
