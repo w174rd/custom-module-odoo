@@ -12,7 +12,7 @@
     'category': 'Uncategorized',
     'version': '0.1',
 
-    'depends': ['base', 'web', 'hr', 'stock', 'purchase'],
+    'depends': ['base', 'web', 'hr', 'stock', 'purchase', 'sale'],
 
     'data': [
         'security/purchase_request_rules.xml',
@@ -24,6 +24,7 @@
         'views/item_menu.xml',
         'data/sequence.xml',
         'views/wizard_create_rfq.xml',
+        'views/inherit_sales.xml'
     ],
 
     # 'demo': [

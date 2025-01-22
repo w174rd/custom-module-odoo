@@ -1,0 +1,12 @@
+<odoo>
+    <record id="sales_inherit_view_id" model="ir.ui.view">
+        <field name="name">sales_inherit_view_id</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='payment_action_capture']" position="before">
+                    <button name="action_test" string="Submit Test" type="object" class="btn-primary" />
+            </xpath>
+        </field>
+    </record>
+</odoo>   

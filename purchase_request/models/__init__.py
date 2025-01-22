@@ -1,1 +1,1 @@
-from . import product_request, purchase_request, res_users, wizard_rfq
+from . import product_request, purchase_request, res_users, wizard_rfq, sales_inherit
