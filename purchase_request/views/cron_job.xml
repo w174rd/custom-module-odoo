@@ -1,0 +1,12 @@
+<odoo noupdate="0">
+    <record id="ir_cron_update_status" model="ir.cron">
+        <field name="name">Update PR Status</field>
+        <field name="model_id" ref="purchase_request.model_purchase_request"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_task_update_status()</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">5</field>
+        <field name="interval_type">hours</field>
+        <field name="active">True</field>
+    </record>
+</odoo>

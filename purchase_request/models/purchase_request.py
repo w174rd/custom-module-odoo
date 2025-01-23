@@ -1,6 +1,7 @@
 from datetime import date, datetime
 from odoo import models, fields, api
 from odoo.exceptions import UserError
+from dateutil.relativedelta import relativedelta
 
 class PurchaseRequest(models.Model):
     _name = 'purchase.request'
@@ -28,6 +29,7 @@ class PurchaseRequest(models.Model):
         ('rejected', 'Rejected'),
         ('pr_validated', 'PR Validated'),
         ('rfq_created', 'RFQ Created'),
+        ('cancel', 'Cancel')
     ], string="Status", default="draft")
 
     is_readonly = fields.Boolean(default=False, compute="_compute_is_readonly")
@@ -65,6 +67,24 @@ class PurchaseRequest(models.Model):
             self.is_readonly = True
         else:
             self.is_readonly = False
+
+    def _cron_task_update_status(self):
+        records = self.search([('status', 'in', ['to_approve'])])
+        for record in records:
+            if record.date:
+                current_date = datetime.now().date()
+
+                # Hitung selisih waktu dalam bulan
+                delta = relativedelta(current_date, record.date)
+                weeks = delta.days // 7
+
+                print(f"Interval: {delta.days} days, {weeks} weeks, {delta.months} months")
+
+                if delta.months >= 1:
+                    print("after 1 month")
+                    record.write({'status': 'cancel'})
+                elif weeks >= 2:
+                    print("after 2 weeks")
 
 
 

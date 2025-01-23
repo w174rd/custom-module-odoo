@@ -24,6 +24,7 @@
         'views/item_menu.xml',
         'data/sequence.xml',
         'views/wizard_create_rfq.xml',
+        'views/cron_job.xml'
     ],
 
     # 'demo': [
