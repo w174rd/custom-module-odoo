@@ -1,11 +1,16 @@
 from odoo import models, fields, api
-from odoo.exceptions import UserError
+from odoo.exceptions import (
+    AccessError,
+    RedirectWarning,
+    UserError,
+    ValidationError,
+)
 
 class WizardRFQ(models.Model):
     _name = 'wizard.rfq'
     _description = 'Wizard RFQ'
 
-    vendor = fields.Many2one('res.partner', string="Vendor")
+    vendor = fields.Many2one('res.partner', string="Vendor", required=True)
     product_req_ids = fields.One2many('product.request', 'wizard_id', store=False)
 
     @api.model
@@ -23,11 +28,10 @@ class WizardRFQ(models.Model):
                 }))
             res.update({'product_req_ids': products})
         return res
+    
+
 
     def action_create_rfq(self):
-        if not self.vendor:
-            raise UserError("Vendor harus dipilih untuk membuat RFQ.")
-        
         # Buat Purchase Order (RFQ)
         purchase_order = self.env['purchase.order'].create({
             'partner_id': self.vendor.id,  # Vendor dari wizard
