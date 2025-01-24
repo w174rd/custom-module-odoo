@@ -35,7 +35,7 @@
         'web.assets_backend': [
             '/purchase_request/static/src/js/override_form_controller.js',
             # 'purchase_request/static/src/js/email_validation_widget.js',
-            # '/purchase_request/static/src/css/custom_style.css',
+            '/purchase_request/static/src/css/custom_style.css',
         ],
     },
     'installable': True,

@@ -4,11 +4,13 @@
         <field name="model">purchase.request</field>
         <field name="type">list</field>
         <field name="arch" type="xml">
-            <list>
-                <field name="date" string="Tanggal Pengajuan" width="200" />
+            <list decoration-danger="is_urgen">
+                <field name="date" string="Tanggal Pengajuan" width="200">
+                    
+                </field>
                 <field name="name" string="Nomor PR"/>
                 <field name="submited_by" string="Diajukan oleh"/>
-                <field name="status" string="Status"/>
+                <field name="status_to_display" string="Status" widget="html" />
             </list>
         </field>
     </record>
@@ -33,8 +35,10 @@
 
                     <field name="status" widget="statusbar" statusbar_visible="draft,to_approve,approved,rejected"/>
                 </header>
+
                 <sheet>
                     <group>
+                        <widget name="web_ribbon" title="Need to process" bg_color="text-bg-danger" invisible="not is_urgen"/>
                         <field name="date" string="Tanggal Pengajuan"/>
                         <field name="name" string="Nomor PR"/>
                         <field name="submited_by" string="Diajukan oleh"/>

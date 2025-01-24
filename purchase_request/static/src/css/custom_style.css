@@ -1,0 +1,29 @@
+
+
+.custom-badge {
+    display: inline-block;
+    padding: 0.5em 0.75em;
+    font-size: 75%;
+    font-weight: 700;
+    border-radius: 0.75rem;
+}
+
+.custom-primary-badge {
+    color: #545454;
+    background-color: #c2c1c1;
+}
+
+.custom-danger-badge {
+    color: #fff;
+    background-color: #C5555C;
+}
+
+.custom-warning-badge {
+    color: #333;
+    background-color: #ecdc00;
+}
+
+.custom-success-badge {
+    color: #333;
+    background-color: #00dd1d;
+}

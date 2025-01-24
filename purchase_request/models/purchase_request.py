@@ -32,13 +32,20 @@ class PurchaseRequest(models.Model):
         ('cancel', 'Cancel')
     ], string="Status", default="draft")
 
+    status_to_display = fields.Html(
+        compute="_compute_status_display",
+        store=False
+    )
+
+    is_urgen = fields.Boolean(string="is Urgen", readonly=True)
+
     is_readonly = fields.Boolean(default=False, compute="_compute_is_readonly")
 
     # Relation product
     product_ids = fields.One2many('product.request', 'parent_id')
 
     def action_set_submit(self):
-        self.status = 'to_approve'
+        self.write({'status':'to_approve'})
         for record in self:
             record.name = self._generate_pr_number()
             # record.date = self._get_formatted_today_date()
@@ -53,10 +60,16 @@ class PurchaseRequest(models.Model):
         return f"PR/{current_year}/{current_month}/{sequence}"
     
     def action_set_approve(self):
-        self.status = 'approved'
+        self.write({
+            'status': 'approved',
+            'is_urgen': False
+            })
 
     def action_set_reject(self):
-        self.status = 'rejected'
+        self.write({
+            'status': 'rejected',
+            'is_urgen': False
+            })
 
     def action_print_out(self):
         return self.env.ref("purchase_request.action_print_out_purchase_request").report_action(self)
@@ -70,6 +83,7 @@ class PurchaseRequest(models.Model):
 
     def _cron_task_update_status(self):
         records = self.search([('status', 'in', ['to_approve'])])
+        print(">>>>>> Cron is running")
         for record in records:
             if record.date:
                 current_date = datetime.now().date()
@@ -82,9 +96,38 @@ class PurchaseRequest(models.Model):
 
                 if delta.months >= 1:
                     print("after 1 month")
-                    record.write({'status': 'cancel'})
+                    record.write({'status': 'cancel',
+                         'is_urgen': False
+                         })
                 elif weeks >= 2:
                     print("after 2 weeks")
+                    record.write({'is_urgen': True})
+
+
+    def _compute_status_display(self):
+        for record in self:
+            status_label = dict(self._fields['status'].selection).get(record.status, record.status)
+            if record.is_urgen and record.status == 'to_approve':
+                record.status_to_display = f"""
+                    <span class="custom-badge custom-warning-badge">{status_label}</span>
+                    <span class="custom-badge custom-danger-badge">Need to process</span>
+                """
+            elif record.status == 'approved':
+                record.status_to_display = f"""
+                    <span class="custom-badge custom-success-badge">{status_label}</span>
+                """
+            elif record.status == 'rejected':
+                record.status_to_display = f"""
+                    <span class="custom-badge custom-danger-badge">{status_label}</span>
+                """
+            elif record.status == 'to_approve':
+                record.status_to_display = f"""
+                    <span class="custom-badge custom-warning-badge">{status_label}</span>
+                """    
+            else:
+                record.status_to_display = f"""
+                    <span class="custom-badge custom-primary-badge">{status_label}</span>
+                """
 
 
 
