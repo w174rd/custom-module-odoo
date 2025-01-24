@@ -65,7 +65,7 @@
         <field name="arch" type="xml">
             <list create="False">
                 <header>
-                    <button name="action_create_rfq" type="object" string="Buat RFQ" class="oe_highlight"/>
+                    <button name="action_create_rfq" type="object" string="Buat RFQ" class="oe_highlight" groups="purchase_request.group_purchase_request_approver" />
                 </header>
                 <field name="relation_pr_number_pr" string="Nomor PR"/>
                 <field name="relation_pr_submited_by" string="Diajukan oleh"/>
