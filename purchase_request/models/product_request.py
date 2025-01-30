@@ -14,6 +14,7 @@ class ProductInherit(models.Model):
         ('user', 'User'),
         ('approver', 'Approver'),
     ], default="user", compute="_compute_groups_id")
+    price = fields.Float(string="Price")
 
 
     # Relation Purchase Request
@@ -65,3 +66,8 @@ class ProductInherit(models.Model):
             'view_mode': 'form',
             'target': 'new',
         }
+    
+    @api.onchange('product')
+    def _onchange_product(self):
+        if self.product:
+            self.price = self.product.lst_price

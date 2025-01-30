@@ -50,6 +50,7 @@
                                             <create name="add_line_control" string="Add a product"/>
                                         </control>
                                         <field name="product" string="Produk"/>
+                                        <field name="price" string="Price" width="200" readonly="true" />
                                         <field name="qty_request" string="Qty Request" width="200"/>
                                         <field name="qty_approved" string="Qty Approved" width="200" readonly="groups_id in ['user']"/>
                                     </list>

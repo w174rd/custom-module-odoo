@@ -19,6 +19,7 @@
                             <thead>
                                 <tr>
                                     <th>Product</th>
+                                    <th>Price</th>
                                     <th>Qty Request</th>
                                     <th>Qty Approved</th>
                                 </tr>
@@ -27,8 +28,9 @@
                                 <t t-foreach="doc.product_ids" t-as="line">
                                     <tr>
                                         <td><span t-field="line.product.name"/></td>
-                                        <td><span t-field="line.qty_request"/></td>
-                                        <td><span t-field="line.qty_approved"/></td>
+                                        <td width="200"><span t-field="line.price"/></td>
+                                        <td width="150"><span t-field="line.qty_request"/></td>
+                                        <td width="150"><span t-field="line.qty_approved"/></td>
                                     </tr>
                                 </t>
                             </tbody>
