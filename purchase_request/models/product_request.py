@@ -14,7 +14,7 @@ class ProductInherit(models.Model):
         ('user', 'User'),
         ('approver', 'Approver'),
     ], default="user", compute="_compute_groups_id")
-    price = fields.Float(string="Price")
+    price = fields.Float(string="Price", store=True, compute="_compute_product_price")
 
 
     # Relation Purchase Request
@@ -67,7 +67,7 @@ class ProductInherit(models.Model):
             'target': 'new',
         }
     
-    @api.onchange('product')
-    def _onchange_product(self):
-        if self.product:
-            self.price = self.product.lst_price
+    @api.depends('product')
+    def _compute_product_price(self):
+        for record in self:
+            record.write({'price': record.product.lst_price})
