@@ -80,4 +80,33 @@
             </list>
         </field>
     </record>
+
+    <record id="view_purchase_request_line_search" model="ir.ui.view">
+    <field name="name">purchase.request.line.search</field>
+    <field name="model">product.request</field>
+    <field name="arch" type="xml">
+        <search>
+            <!-- Field -->
+            <field name="relation_pr_number_pr"/>
+            <separator/>
+            <field name="relation_pr_submited_by"/>
+            <separator/>
+            <field name="product"/>
+            <separator/>
+            <field name="qty_approved"/>
+            <separator/>
+            <field name="custom_status_display"/>
+
+            <!-- Custom Filter -->
+            <filter name="filter_status_pr_validated" string="PR Validated" domain="[('relation_pr_status', '=', 'approved')]"/>
+            <filter name="filter_status_rfq_created" string="RFQ Created" domain="[('relation_pr_status', '=', 'rfq_created')]"/>
+
+            <!-- Group By -->
+            <group string="Group By">
+                <filter name="group_by_pr_number" string="Nomor PR" context="{'group_by': 'relation_pr_number_pr'}"/>
+                <filter name="group_by_submited_by" string="Diajukan oleh" context="{'group_by': 'relation_pr_submited_by'}"/>
+            </group>
+        </search>
+    </field>
+</record>
 </odoo>
