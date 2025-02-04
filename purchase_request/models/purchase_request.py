@@ -45,11 +45,23 @@ class PurchaseRequest(models.Model):
     product_ids = fields.One2many('product.request', 'parent_id')
 
     def action_set_submit(self):
-        self.write({'status':'to_approve'})
+        is_valid = True
         for record in self:
+            if record.product_ids:
+                for product in record.product_ids:
+                    print(f"======== {product.qty_request}")
+                    if product.qty_request <= 0:
+                        is_valid = False
+            else:
+                is_valid = False
+
+        if is_valid:
+            self.write({'status':'to_approve'})
             record.name = self._generate_pr_number()
             # record.date = self._get_formatted_today_date()
             record.date = fields.Date.context_today(self)
+        else:
+            raise UserError("Product dan QTY Request tidak boleh kosong")
 
     def _generate_pr_number(self):
         current_year = datetime.now().strftime('%y')
@@ -60,10 +72,22 @@ class PurchaseRequest(models.Model):
         return f"PR/{current_year}/{current_month}/{sequence}"
     
     def action_set_approve(self):
-        self.write({
-            'status': 'approved',
-            'is_urgen': False
-            })
+        approved = True
+        
+        if self.product_ids:
+            for product in self.product_ids:
+                    if product.qty_approved <= 0:
+                        approved = False
+        else:
+            approved = False
+
+        if approved:
+            self.write({
+                'status': 'approved',
+                'is_urgen': False
+                })
+        else:
+            raise UserError("Product dan QTY Approved tidak boleh kosong")
 
     def action_set_reject(self):
         self.write({
