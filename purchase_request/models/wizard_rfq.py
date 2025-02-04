@@ -35,6 +35,9 @@ class WizardRFQ(models.Model):
     def action_create_rfq(self):
         active_ids = self.env.context.get('active_ids', [])
 
+        if self.env['product.request'].browse(active_ids).purchase_order:
+            raise UserError("Purchase Order sudah dibuat sebelumnya")
+
         # Buat Purchase Order (RFQ)
         purchase_order_record = self.env['purchase.order'].create({
             'partner_id': self.vendor.id,  # Vendor dari wizard
