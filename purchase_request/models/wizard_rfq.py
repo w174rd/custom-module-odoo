@@ -18,6 +18,7 @@ class WizardRFQ(models.Model):
         res = super(WizardRFQ, self).default_get(fields_list)
         active_ids = self.env.context.get('active_ids', []) # Ambil ID yang dipilih
         if active_ids:
+            print(f"======== {active_ids} ========")
             products = []
             for product in self.env['product.request'].browse(active_ids):
                 products.append((0, 0, {
@@ -32,15 +33,17 @@ class WizardRFQ(models.Model):
 
 
     def action_create_rfq(self):
+        active_ids = self.env.context.get('active_ids', [])
+
         # Buat Purchase Order (RFQ)
-        purchase_order = self.env['purchase.order'].create({
+        purchase_order_record = self.env['purchase.order'].create({
             'partner_id': self.vendor.id,  # Vendor dari wizard
         })
 
-        # Tambahkan baris ke RFQ berdasarkan produk yang dipilih
-        for product in self.product_req_ids:
+        for product in self.env['product.request'].browse(active_ids):
+
             self.env['purchase.order.line'].create({
-                'order_id': purchase_order.id,
+                'order_id': purchase_order_record.id,
                 'product_id': product.product.id,
                 'product_qty': product.qty_approved,
                 # 'price_unit': product.product.standard_price,
@@ -51,11 +54,15 @@ class WizardRFQ(models.Model):
             if product.parent_id:
                 product.parent_id.write({'status': 'rfq_created'})
 
+            product.write({
+                'purchase_order': purchase_order_record.id
+            })
+
         return {
             'type': 'ir.actions.act_window',
             'name': 'Request for Quotation',
             'res_model': 'purchase.order',
             'view_mode': 'form',
-            'res_id': purchase_order.id,
+            'res_id': purchase_order_record.id,
             'target': 'current',
         }

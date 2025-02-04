@@ -15,11 +15,12 @@ class ProductInherit(models.Model):
         ('approver', 'Approver'),
     ], default="user", compute="_compute_groups_id")
     price = fields.Float(string="Price", store=True, compute="_compute_product_price")
+    purchase_order = fields.Many2one('purchase.order', string="Purchase Order")
 
 
     # Relation Purchase Request
     parent_id = fields.Many2one('purchase.request', readonly=True)
-    wizard_id = fields.Many2one('wizard.rfq', readonly=True)
+    wizard_id = fields.Many2one('wizard.rfq', store=False)
 
     relation_pr_number_pr = fields.Char(
         related='parent_id.name', 
@@ -71,3 +72,6 @@ class ProductInherit(models.Model):
     def _compute_product_price(self):
         for record in self:
             record.write({'price': record.product.lst_price})
+
+    def _compute_purchase_order(self):
+        return self.purchase_order.name
