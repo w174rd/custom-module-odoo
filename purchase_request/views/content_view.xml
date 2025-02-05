@@ -31,7 +31,10 @@
                     <button name="action_set_reject" string="Reject" type="object" class="btn-danger" 
                         invisible="status != 'to_approve'" groups="purchase_request.group_purchase_request_approver" />
 
-                    <button name="action_print_out" string="Print" type="object" />    
+                    <button name="action_set_to_draft" string="Draft" type="object" class="btn-primary" 
+                        invisible="status not in ['cancel', 'rejected']" />
+
+                    <button name="action_print_out" string="Print" type="object" />
 
                     <field name="status" widget="statusbar" statusbar_visible="draft,to_approve,approved,rejected"/>
                 </header>

@@ -94,6 +94,16 @@ class PurchaseRequest(models.Model):
             'status': 'rejected',
             'is_urgen': False
             })
+        
+    def action_set_to_draft(self):
+        for record in self:
+            record.write({
+                'date': None,
+                'name': None,
+                'is_urgen': None,
+                'is_readonly': None,
+                'status': 'draft'
+            })
 
     def action_print_out(self):
         return self.env.ref("purchase_request.action_print_out_purchase_request").report_action(self)

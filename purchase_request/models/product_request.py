@@ -42,6 +42,12 @@ class ProductInherit(models.Model):
         store=False
     )
 
+    @api.model
+    def search_read(self, domain=None, fields=None, offset=0, limit=None, order=None):
+        domain = domain or []
+        domain.append(('relation_pr_status', '=', 'approved'))  # Filter otomatis
+        return super(ProductInherit, self).search_read(domain, fields, offset, limit, order)
+
     def _compute_status_display(self):
         for record in self:
             if record.relation_pr_status == 'approved':
