@@ -146,7 +146,7 @@ class PurchaseRequest(models.Model):
                     <span class="custom-badge custom-warning-badge">{status_label}</span>
                     <span class="custom-badge custom-danger-badge">Need to process</span>
                 """
-            elif record.status == 'approved':
+            elif record.status == 'approved' or record.status == 'rfq_created':
                 record.status_to_display = f"""
                     <span class="custom-badge custom-success-badge">{status_label}</span>
                 """
